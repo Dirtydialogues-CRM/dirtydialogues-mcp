@@ -1,73 +1,54 @@
-# DirtyDialogues MCP — give your AI agent a chat automation engine
+# DirtyDialogues MCP — chat-automation tools for your AI agent (example)
 
-Let Claude, Cursor, or any MCP-compatible agent **run fan conversations at scale** — send DMs, launch mass-message campaigns, and draft on-brand replies — all through one API.
+An open-source example [MCP](https://modelcontextprotocol.io) server that shows how any AI agent — Claude, Cursor, or any MCP client — can drive **OnlyFans chat automation** on top of [DirtyDialogues](https://dirtydialogues.com), the OnlyFans agency chat & CRM platform: manage fan conversations, run mass-message campaigns, and draft on-brand replies.
 
-**[▶ Get your API key →](https://dirtydialogues.com/signup?ref=mcp)** · [Docs](https://dirtydialogues.com/docs) · [Pricing](https://dirtydialogues.com/pricing)
+**[▶ Get started at dirtydialogues.com →](https://dirtydialogues.com)** · [Pricing](https://dirtydialogues.com/pricing)
 
-![status](https://img.shields.io/badge/example-MIT-blue) ![mcp](https://img.shields.io/badge/MCP-server-black) ![node](https://img.shields.io/badge/node-18+-green)
+![example](https://img.shields.io/badge/example-MIT-blue) ![mcp](https://img.shields.io/badge/MCP-server-black) ![node](https://img.shields.io/badge/node-18+-green)
 
 ---
 
 ## What this is
 
-A minimal, MIT-licensed [MCP](https://modelcontextprotocol.io) server (TypeScript/Node) that exposes the DirtyDialogues chat API as agent tools. Get a key, add the server to your agent, and it can pull conversations, send and schedule messages, run mass-message campaigns, and generate reply drafts. Intentionally tiny — it just calls the public API and returns the result. Nothing proprietary. Copy it and go.
+A minimal, MIT-licensed [MCP](https://modelcontextprotocol.io) server (TypeScript/Node) that demonstrates the **shape** of a DirtyDialogues chat-automation integration for AI agents. It shows how you'd expose fan-conversation actions — pull conversations, send and schedule messages, run mass-message campaigns, draft replies — as agent tools.
 
-## Quickstart (~5 min)
+> **This is an open-source example.** The endpoint paths and response fields in the code are **illustrative placeholders** — DirtyDialogues is a managed OnlyFans agency platform, so head to **[dirtydialogues.com](https://dirtydialogues.com)** to get started. Nothing proprietary here: it's a clean pattern you can read, copy, and adapt.
 
-**1. Get your API key** → **[dirtydialogues.com/signup](https://dirtydialogues.com/signup?ref=mcp)**
+## Why — the agency use case
 
-**2. Install & build**
+OnlyFans management agencies run **fan conversations at scale** across many creator inboxes. [DirtyDialogues](https://dirtydialogues.com) is the platform they use to do it — a unified inbox, mass DMs, AI-assisted replies, and analytics in one place. This example shows the pattern for giving an AI agent tools that operate on top of that workflow.
+
+## Install & build
+
 ```bash
 npm install
 npm run build
 ```
 
-**3. Add to your agent** — e.g. Claude Desktop `claude_desktop_config.json`:
+## Add to your agent
+
+e.g. Claude Desktop `claude_desktop_config.json`:
+
 ```json
 {
   "mcpServers": {
     "dirtydialogues": {
       "command": "node",
       "args": ["/path/to/dirtydialogues-mcp/dist/index.js"],
-      "env": { "DIRTYDIALOGUES_API_KEY": "dd_live_..." }
+      "env": { "DIRTYDIALOGUES_API_KEY": "your-key" }
     }
   }
 }
 ```
 
-Your agent now has these tools:
+The tools in `src/index.ts` are intentionally tiny wrappers — read them, adapt the pattern to your own stack.
 
-| Tool | What it does |
-|------|--------------|
-| `list_conversations` | Recent conversations, newest first |
-| `send_message` | Send a message in one conversation |
-| `send_campaign` | Queue a mass message to a segment of fans |
-| `suggest_reply` | Get an AI-drafted reply for a conversation |
+## About DirtyDialogues
 
-## Try it
+[**DirtyDialogues**](https://dirtydialogues.com) is an OnlyFans agency platform for managing fan conversations at scale: unified inbox, mass DMs, automated & AI-assisted replies, scripts & templates, team shifts, and analytics.
 
-Ask your agent:
+**[Get started →](https://dirtydialogues.com)** · **[Pricing →](https://dirtydialogues.com/pricing)**
 
-> "Draft a warm reply to my newest conversation, then show it to me before sending."
+## License
 
-Your agent calls `suggest_reply` and gets back:
-
-```json
-{
-  "conversation_id": "c_4b1e...",
-  "suggested_reply": "Hey! So glad you're here 💕 ...",
-  "tone": "warm"
-}
-```
-
-## Ready to build?
-
-**[▶ Get your API key →](https://dirtydialogues.com/signup?ref=mcp)** — see [pricing](https://dirtydialogues.com/pricing).
-
-## Links & notes
-
-[Docs](https://dirtydialogues.com/docs) · [API reference](https://dirtydialogues.com/docs/api) · [Pricing](https://dirtydialogues.com/pricing) · [Dashboard](https://dirtydialogues.com/dashboard) · [Support](https://dirtydialogues.com/support)
-
-> This is an **example integration**, not production code — it omits retries, pagination, and rich error handling (see the [docs](https://dirtydialogues.com/docs) for those). It talks only to the public DirtyDialogues API; there's no proprietary logic here.
-
-MIT licensed.
+MIT — see [LICENSE](./LICENSE). This is an independent open-source example.
