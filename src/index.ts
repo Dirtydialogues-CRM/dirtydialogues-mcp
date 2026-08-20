@@ -5,7 +5,7 @@
  * Minimal EXAMPLE: a pure client wrapper over the public DirtyDialogues REST
  * API. key -> endpoint -> result. Nothing else.
  *
- * Get an API key at https://dirtydialogues.com/signup
+ * Get an API key at https://dirtydialogues.com
  *
  * Run:
  *   npm install && npm run build
@@ -24,7 +24,7 @@ async function call(path: string, init: RequestInit = {}): Promise<unknown> {
   if (!API_KEY) {
     throw new Error(
       "DIRTYDIALOGUES_API_KEY is not set. Get a key at " +
-        "https://dirtydialogues.com/signup and set it in your MCP config."
+        "https://dirtydialogues.com and set it in your MCP config."
     );
   }
   const res = await fetch(`${API_BASE}${path}`, {
@@ -39,7 +39,7 @@ async function call(path: string, init: RequestInit = {}): Promise<unknown> {
     return {
       error: "unauthorized",
       message:
-        "Invalid or missing API key. Get one at https://dirtydialogues.com/signup",
+        "Invalid or missing API key. Get one at https://dirtydialogues.com",
     };
   }
   if (!res.ok)
